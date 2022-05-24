@@ -1,16 +1,8 @@
 #!/bin/bash
 
-#SBATCH --mem 10GB 
-#SBATCH -o mkBEDofEVEs.%N.%j.out
-#SBATCH -e mkBEDofEVEs.%N.%j.err
-#SBATCH --cpus-per-task=1
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=pjacques@sb-roscoff.fr
-#SBATCH -p fast
-
-#module load bedtools
-
 f="./sources/names.txt"
+f1="./sources_fa"
+f2="./sources_gff"
 param="good"
 wdw="50000"
 lines=$(cat $f)
@@ -23,8 +15,8 @@ do
     echo $l
     fst="$l.fa"
     gff="$l.gff"
-    sfst="./sources_fa/${fst}"
-    sgff="./sources_gff/${gff}"
+    sfst="${f1}/${fst}"
+    sgff="${f2}/${gff}"
     gff2="./genes_of_EVEs/${param}_${gff}"
     fst2="./fasta_of_genes/${param}_${fst}"
     bed1="./BED/EVEs_of_$l.bed"
